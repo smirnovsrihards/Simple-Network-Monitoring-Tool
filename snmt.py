@@ -2,13 +2,33 @@
 
 import socket
 import threading
-from scapy.all import Ether, ARP, TCP, UDP, ICMP, IP
+from scapy.all import Ether, ARP, TCP, UDP, ICMP, IP, srp
 import argparse
 import textwrap
 import cmd
 
+#ARP scan function was taken from: https://thepythoncode.com/article/building-network-scanner-using-scapy
 class ARPScan:
-    pass
+    def __init__(self, target):
+        self.target = target
+        
+    def find(self, target):
+        #Create ARP packet
+        arp = ARP(pdst=target)
+        #Create Ethernet Broadcast
+        ether = Ether(dst='ff:ff:ff:ff:ff:ff')
+        #Stack them
+        packet = ether/arp
+
+        result = srp(packet, timeout=3)[0]
+
+        hosts=[]
+        for sent, received in result:
+            hosts.append({'ip': received.psrc, 'mac': received.hwsrc})
+        print("Active hosts in the network:")
+        print("IP" + " "*18+"MAC" )
+        for host in hosts:
+            print("{:16}   {}".format(host['ip'], host['mac']))
 
 class ICMPScan:
     pass
@@ -19,8 +39,12 @@ class TCPSniffer:
 class UDPSniffer:
     pass
 
-class Shell():
+class Shell(cmd.Cmd):
     pass
 
 if __name__ == '__main__':
-    pass
+    
+    target = '192.168.88.0/24'
+
+    run = ARPScan(target)
+    run.find(target)
