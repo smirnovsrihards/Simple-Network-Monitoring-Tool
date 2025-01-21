@@ -7,11 +7,10 @@ import argparse
 import textwrap
 import cmd
 
-#ARP scan function was taken from: https://thepythoncode.com/article/building-network-scanner-using-scapy
 class ARPScan:
     def __init__(self, target):
         self.target = target
-        
+    #ARP scan function was taken from: https://thepythoncode.com/article/building-network-scanner-using-scapy    
     def find(self, target):
         #Create ARP packet
         arp = ARP(pdst=target)
