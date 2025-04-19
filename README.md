@@ -1,2 +1,1 @@
 # Simple-Network-Monitoring-Tool
-This script will have the following functions: scanning the network for active hosts through the ARP protocol, scanning active hosts for services like DNS, WEB, SMTP, etc. It will have the ability to notify the admin about a host being down via email. I have only just started developing it, so I may change some of these functions or/and add more to the existing ones.
