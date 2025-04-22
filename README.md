@@ -4,7 +4,6 @@ When the script starts, it scans the network for active hosts and their services
 
 ## Installation
 1. Set up config.ini
-2. Set up smtp info
-3. install requirements
-4. chmod +x snmt.py
-5. sudo ./snmt.py
+2. install requirements
+3. chmod +x snmt.py
+4. sudo ./snmt.py
