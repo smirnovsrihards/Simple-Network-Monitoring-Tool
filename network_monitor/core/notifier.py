@@ -1,3 +1,4 @@
+from core.configer import ConfManager
 import smtplib, ssl
 from email.message import EmailMessage
 
@@ -6,11 +7,14 @@ class SendMail:
         self.host = host
     
     def send(self):
-        port = 465
-        smtp_server = "smtp.gmail.com"
-        sender_email = "Add your sender mail"
-        receiver_email = "Add your receiver mail"
-        app_password = 'App password from Google'
+        read = ConfManager
+        config_data = read.read_config()
+        
+        port = config_data['port']
+        smtp_server = config_data['smtp_server']
+        sender_email = config_data['sender_email']
+        receiver_email = config_data['receiver_email']
+        app_password = config_data['app_password']
         
         messg = EmailMessage()
         messg.set_content(f"Alert: Host {self.host} is DOWN!!!")
